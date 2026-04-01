@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB-GEN Medical — Diagnóstico Clínico con Trazabilidad XAI</title>
+    <meta name="description" content="Sistema de IA médica trazable para diagnóstico de células sanguíneas. Explica cada decisión con mapas de calor y análisis paso a paso.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="main-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="18" stroke="url(#grad1)" stroke-width="2.5" fill="none"/>
+                        <path d="M14 20h12M20 14v12" stroke="url(#grad1)" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="20" cy="20" r="4" fill="url(#grad1)" opacity="0.3"/>
+                        <defs>
+                            <linearGradient id="grad1" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#00d4aa"/>
+                                <stop offset="100%" stop-color="#4ecdc4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>AB-GEN <span class="accent">MEDICAL</span></h1>
+                    <p class="subtitle">Diagnóstico Clínico con Trazabilidad XAI</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <span class="badge badge-xai">🔬 XAI Trazable</span>
+                <span class="badge badge-green">🌿 Green AI</span>
+                <span class="badge badge-acc" id="badge-accuracy">87.14% Accuracy</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="app">
+
+        <!-- PANEL DE CONTROL -->
+        <section class="control-panel glass-card">
+            <div class="control-left">
+                <h2>🩺 Panel de Control Clínico</h2>
+                <p class="control-desc">Selecciona una muestra del dataset BloodMNIST para analizar. La IA diagnosticará el tipo celular y explicará paso a paso por qué tomó esa decisión.</p>
+            </div>
+            <div class="control-buttons">
+                <button id="btn-analyze" class="btn btn-primary" onclick="analyzeSample()">
+                    <span class="btn-icon">🔬</span>
+                    <span class="btn-text">ANALIZAR MUESTRA</span>
+                </button>
+                <button id="btn-batch" class="btn btn-secondary" onclick="analyzeBatch()">
+                    <span class="btn-icon">📊</span>
+                    <span class="btn-text">LOTE DE 10</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- LOADING STATE -->
+        <section id="loading-state" class="loading-section" style="display:none;">
+            <div class="loading-container glass-card">
+                <div class="dna-helix">
+                    <div class="helix-strand"></div>
+                    <div class="helix-strand"></div>
+                    <div class="helix-strand"></div>
+                </div>
+                <p class="loading-text">Analizando muestra celular...</p>
+                <p class="loading-sub">Procesando muestra con motor de diagnóstico...</p>
+            </div>
+        </section>
+
+        <!-- RESULTADO PRINCIPAL -->
+        <section id="result-section" style="display:none;">
+
+            <!-- VEREDICTO -->
+            <div id="verdict-card" class="verdict-card glass-card">
+                <div class="verdict-header">
+                    <div class="verdict-icon" id="verdict-icon">✅</div>
+                    <div class="verdict-info">
+                        <h2 id="verdict-title">Diagnóstico: Linfocito</h2>
+                        <p id="verdict-subtitle">Real: Linfocito — Certeza: 94.2%</p>
+                    </div>
+                    <div class="verdict-badge" id="verdict-confidence-badge">
+                        <span class="confidence-value" id="confidence-value">94.2%</span>
+                        <span class="confidence-label">CERTEZA</span>
+                    </div>
+                </div>
+                <p class="verdict-description" id="cell-description"></p>
+            </div>
+
+            <!-- GRID DE ANÁLISIS VISUAL -->
+            <div class="analysis-grid">
+
+                <!-- Imagen Original -->
+                <div class="image-panel glass-card">
+                    <h3>📸 Muestra Original</h3>
+                    <div class="image-container">
+                        <img id="img-original" src="" alt="Célula original">
+                    </div>
+                    <p class="image-label" id="label-original">Real: Linfocito</p>
+                </div>
+
+                <!-- Heatmap XAI -->
+                <div class="image-panel glass-card">
+                    <h3>🔥 Trazabilidad XAI</h3>
+                    <div class="image-container">
+                        <img id="img-heatmap" src="" alt="Mapa de activación XAI">
+                    </div>
+                    <p class="image-label">Zonas de decisión topológica</p>
+                    <div class="heatmap-legend">
+                        <div class="legend-bar"></div>
+                        <div class="legend-labels">
+                            <span>Baja activación</span>
+                            <span>Alta activación</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Distribución de Probabilidades -->
+                <div class="chart-panel glass-card">
+                    <h3>📊 Distribución de Certeza</h3>
+                    <div id="prob-chart" class="prob-chart"></div>
+                </div>
+            </div>
+
+            <!-- PANEL DE TRAZABILIDAD DETALLADA -->
+            <div class="traceability-section glass-card">
+                <div class="trace-header" onclick="toggleTraceability()">
+                    <h3>🔍 Informe de Trazabilidad Completo</h3>
+                    <span class="trace-toggle" id="trace-toggle">▼</span>
+                </div>
+                <p class="trace-veredicto" id="trace-veredicto"></p>
+                <div id="trace-steps" class="trace-steps"></div>
+            </div>
+
+            <!-- MÉTRICAS GREEN AI -->
+            <div class="metrics-grid">
+                <div class="metric-card glass-card">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-value" id="metric-latency">0 ms</div>
+                    <div class="metric-label">Latencia</div>
+                </div>
+                <div class="metric-card glass-card">
+                    <div class="metric-icon">🔋</div>
+                    <div class="metric-value" id="metric-energy">0 kWh</div>
+                    <div class="metric-label">Energía</div>
+                </div>
+                <div class="metric-card glass-card">
+                    <div class="metric-icon">🌍</div>
+                    <div class="metric-value" id="metric-co2">0 g</div>
+                    <div class="metric-label">CO₂</div>
+                </div>
+                <div class="metric-card glass-card">
+                    <div class="metric-icon">🎯</div>
+                    <div class="metric-value" id="metric-total">0</div>
+                    <div class="metric-label">Muestras Test</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTADOS BATCH -->
+        <section id="batch-section" style="display:none;">
+            <div class="batch-summary glass-card">
+                <h2>📊 Resultados del Lote</h2>
+                <div class="batch-stats">
+                    <div class="batch-stat">
+                        <span class="batch-value" id="batch-accuracy">0%</span>
+                        <span class="batch-label">Accuracy</span>
+                    </div>
+                    <div class="batch-stat">
+                        <span class="batch-value" id="batch-total">0/0</span>
+                        <span class="batch-label">Aciertos</span>
+                    </div>
+                    <div class="batch-stat">
+                        <span class="batch-value" id="batch-latency">0 ms</span>
+                        <span class="batch-label">Latencia Media</span>
+                    </div>
+                </div>
+            </div>
+            <div id="batch-grid" class="batch-grid"></div>
+        </section>
+
+        <!-- POR QUÉ AB-GEN -->
+        <section class="arch-section glass-card" id="arch-section">
+            <h2>💡 ¿Por Qué AB-GEN Medical?</h2>
+            <div class="value-grid">
+                <div class="value-item">
+                    <div class="value-icon">🔍</div>
+                    <h4>Trazabilidad Real</h4>
+                    <p>Cada diagnóstico incluye un informe clínico paso a paso que explica POR QUÉ la IA llegó a esa conclusión. No es una caja negra.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🔥</div>
+                    <h4>Mapas de Activación</h4>
+                    <p>Visualización de las zonas exactas de la muestra que la IA analizó para tomar su decisión. Explicabilidad visual verificable.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">📊</div>
+                    <h4>Certeza Cuantificada</h4>
+                    <p>No solo un diagnóstico: distribución completa de probabilidades para cada tipo celular con nivel de certeza calibrado.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">⚡</div>
+                    <h4>Eficiencia Green AI</h4>
+                    <p>Diagnóstico en milisegundos con consumo energético mínimo. Preparado para entornos clínicos de alto volumen.</p>
+                </div>
+            </div>
+            <div class="arch-differentiator">
+                <p><strong>Las IAs médicas actuales dan un resultado sin explicación.</strong> En diagnóstico clínico, eso es inaceptable. AB-GEN Medical genera un informe de trazabilidad inquebrantable con rigor médico para cada muestra analizada.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>AB-GEN Medical © 2026 — Diagnóstico Clínico con IA Trazable</p>
+            <p class="footer-disclaimer">⚠️ Demo de investigación. No sustituye diagnóstico médico profesional. Dataset: BloodMNIST (MedMNIST).</p>
+        </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
