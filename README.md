@@ -1,10 +1,13 @@
-# 🩺 AB-GEN Medical: Trusted XAI for Hematological Diagnosis
-> **Technical Prospectus & Clinical Demonstration**
+# AB-GEN Medical — Experimental Hematology Image Demo
+> **RESEARCH PROTOTYPE — NOT A MEDICAL DEVICE. NOT FOR DIAGNOSIS OR TREATMENT.**
+
+
+See [Evidence and limitations](EVIDENCE_STATUS.md), [Security](SECURITY.md) and [Contributing](CONTRIBUTING.md) for reproduction requirements.
 
 ---
 
 ## 📝 Abstract
-The adoption of Artificial Intelligence in clinical environments is often hindered by the "Black Box" nature of modern Deep Learning models. **AB-GEN Medical** introduces a paradigm shift in hematological diagnosis by providing a **traceable, interpretable, and high-performance** system for blood cell classification. Using a multi-stage geometric and spectral inference engine, AB-GEN identifies 8 types of blood cells while generating a comprehensive 7-step clinical report and real-time activation heatmaps for every single diagnosis.
+The adoption of Artificial Intelligence in clinical environments is often hindered by the "Black Box" nature of modern Deep Learning models. **AB-GEN Medical** explores a traceable multi-stage image-classification interface. The diagnostic accuracy and calibration of this demonstration have not been independently established. Using a multi-stage geometric and spectral inference engine, The UI presents eight example cell categories with an exploratory seven-stage technical trace and illustrative activation visualizations; these are not clinical reports or validated diagnoses.
 
 ---
 
@@ -17,30 +20,30 @@ The adoption of Artificial Intelligence in clinical environments is often hinder
 ## 💡 The Problem: Medical "Black Boxes"
 Current AI models in medicine often provide a verdict (e.g., "98% Lymphocyte") without explaining the underlying morphological rationale. In high-stakes clinical decisions, this lack of transparency is unacceptable.
 
-### Our Solution: Inherent Traceability
-AB-GEN Medical was built from the ground up to be **Explainable by Design**. Instead of end-to-end black box training, our **Quimera V24** architecture follows a rigorous clinical reasoning process:
-1. **Morphological Extraction**: Captures 99.2% of visual information.
+### Experimental Technical Pipeline
+AB-GEN Medical was built from the ground up to be **Explainable by Design**. Instead of end-to-end black box training, our **Quimera V24** architecture presents a sequence of engineering transformations:
+1. **Morphological Extraction**: Performs dimensionality reduction; the historical 99.2% figure is not independently validated here.
 2. **Fisher Discriminant Analysis**: Amplifies the most relevant diagnostic features.
 3. **Topological Frequency Analysis**: Studies the "spectral signature" of the cell.
 4. **Geometric Prototyping**: Measures affinity against established class centroids.
 5. **Class Consensus**: A swarm of independent specialists (MLPs and LogReg) analyzes the sample.
-6. **Second-Level Verification**: A meta-learner validates the consensus and quantifies certainty.
+6. **Second-Level Verification**: A meta-learner combines component outputs; confidence calibration has not been clinically validated.
 
 ---
 
 ## 🔬 XAI Traceability Report
-Every diagnosis in this demo includes:
-- **Clinical Trace Visibility**: A 7-step breakdown of the AI's reasoning.
-- **Topological Heatmaps**: Direct visualization of the cellular regions that triggered the diagnosis.
-- **Calibrated Certainty**: Full probability distribution over 8 cell classes.
+Each example classification in this research interface can include:
+- **Engineering trace visibility**: a seven-stage display of calculated model features.
+- **Exploratory heatmaps**: visualizations whose clinical faithfulness has not been established.
+- **Unvalidated scores**: eight output scores; do not interpret them as clinically calibrated probabilities.
 
 ---
 
-## 🌿 Green AI: Performance & Sustainability (M5)
+## Green AI — Historical Figures Awaiting Reproduction
 AB-GEN Medical is part of the **M5 initiative**, prioritizing efficient computing without sacrificing accuracy.
-- **Latency**: < 100ms per sample.
-- **Precision**: 87.14% (Tested on BloodMNIST).
-- **Eco-Impact**: Ultra-low energy consumption and CO₂ footprint per diagnosis.
+- **Latency**: historical claim of below 100 ms, not reproduced here with hardware/measurement protocol.
+- **Accuracy**: 87.14% historically reported for BloodMNIST; test split, preprocessing and source artifact reproducibility need independent audit.
+- **Energy/CO₂**: no independently verified comparative measurements are provided; no quantitative advantage is claimed.
 
 ---
 
@@ -52,8 +55,8 @@ AB-GEN Medical is part of the **M5 initiative**, prioritizing efficient computin
 
 ### 2. Quick Launch
 ```bash
-git clone https://github.com/your-username/AB-GEN-MEDICAL-DEMO.git
-cd AB-GEN-MEDICAL-DEMO
+git clone https://github.com/msrobotika/AB-GEN-MEDICAL-DEMO..git
+cd AB-GEN-MEDICAL-DEMO.
 pip install -r requirements_demo.txt
 python server.py
 ```
@@ -73,13 +76,13 @@ The engine consists of a "Blind Inference" pipeline separated from the training 
 ---
 
 ## 📄 License & Disclaimer
-- **Code**: MIT License.
+- **Code**: MIT License, see [LICENSE](LICENSE); model files and any data retain their separate rights.
 - **Models & Architecture**: Proprietary and Confidential (AB-GEN).
-- **Disclaimer**: This is a research demonstration tool. Not for real-time medical diagnosis in professional clinical settings.
+- **Disclaimer**: Research interface only, not for real-world medical diagnosis, triage, treatment, or clinical risk stratification. No identifiable patient material should be uploaded.
 
 ---
 
 <p align="center">
   <strong>AB-GEN Medical © 2026</strong><br>
-  Leading the way in Traceable Clinical Intelligence.
+  Experimental interpretable image-classification research.
 </p>
