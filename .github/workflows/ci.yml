@@ -1,0 +1,29 @@
+name: AB-GEN Medical Demo · static integrity
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-validation:
+    name: Source syntax only (no clinical inference)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check source syntax without importing models
+        run: |
+          python -m py_compile engine.py server.py
+          node --check static/app.js
+          test -f LICENSE
+          test -f EVIDENCE_STATUS.md
+      - name: Declare boundary
+        run: echo 'Syntax only. No accuracy, speed, clinical safety, model authenticity, or deployment tested.'
