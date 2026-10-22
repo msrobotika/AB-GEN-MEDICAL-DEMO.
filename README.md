@@ -1,4 +1,6 @@
 # AB-GEN Medical — Experimental Hematology Image Demo
+
+**[Ficha verificable del proyecto](docs/PROJECT_STATUS.md)** · Esta demostración no dispone de validación clínica para decisiones sobre pacientes.
 > **RESEARCH PROTOTYPE — NOT A MEDICAL DEVICE. NOT FOR DIAGNOSIS OR TREATMENT.**
 
 
